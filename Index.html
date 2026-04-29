@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="tab-title">Sergios Games</title>
+  <link rel="icon" id="tab-icon" href="<img src=""/>
+  <style>
+    /* Reset & Base Styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-gradient: linear-gradient(135deg, #1e3c72, #2a5298);
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --text-color: #ffffff;
+      --accent-color: #4CAF50;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
+
+    body.dark-mode {
+      --bg-gradient: linear-gradient(135deg, #121212, #1e1e1e);
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --text-color: #f5f5f5;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 1000; }
+    .checkbox { display: none; }
+    .switch { width: 50px; height: 25px; background: #ccc; border-radius: 50px; position: relative; cursor: pointer; display: block; }
+    .checkbox:checked + .switch { background: var(--accent-color); }
+    .switch::before { content: ''; width: 20px; height: 20px; background: #fff; border-radius: 50%; position: absolute; top: 2.5px; left: 2.5px; transition: 0.3s; }
+    .checkbox:checked + .switch::before { left: 27.5px; }
+
+    /* Navigation */
+    nav { background: rgba(0, 0, 0, 0.2); padding: 1rem 0; position: sticky; top: 0; z-index: 999; backdrop-filter: blur(10px); }
+    nav ul { list-style: none; display: flex; justify-content: center; gap: 2rem; }
+    nav a { color: #fff; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+    nav a:hover { color: var(--accent-color); }
+
+    /* Section Layouts */
+    section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; text-align: center; }
+    .hero { background: rgba(0, 0, 0, 0.1); padding: 6rem 2rem; }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+
+    /* Grid Layout */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+
+    /* Game & App Cards */
+    .card, .game-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.3s, background 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .game-card { height: 180px; cursor: pointer; }
+    .card:hover, .game-card:hover { transform: translateY(-8px); background: rgba(255, 255, 255, 0.2); }
+
+    .game-btn {
+      margin-top: 10px;
+      padding: 10px;
+      background: var(--accent-color);
+      border: none;
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Proxy Section */
+    .proxy-form { display: flex; justify-content: center; margin-top: 1.5rem; }
+    .proxy-form input { padding: 1rem; width: 100%; max-width: 400px; border: none; border-radius: 10px 0 0 10px; outline: none; }
+    .proxy-form button { padding: 1rem 2rem; background: var(--accent-color); color: white; border: none; border-radius: 0 10px 10px 0; cursor: pointer; font-weight: bold; }
+
+    /* Apps/Embeds */
+    .app-card iframe { width: 100%; border-radius: 8px; height: 200px; margin-bottom: 1rem; border: none; }
+
+    /* Cloaker Button */
+    .cloaker-btn { margin-top: 1rem; padding: 0.6rem 1.2rem; background: transparent; border: 1px solid #fff; color: #fff; cursor: pointer; border-radius: 5px; }
+
+    footer { text-align: center; padding: 3rem; background: rgba(0, 0, 0, 0.3); margin-top: 4rem; }
+  </style>
+</head>
+<body>
+
+  <div class="theme-toggle">
+    <input type="checkbox" id="darkModeToggle" class="checkbox" />
+    <label for="darkModeToggle" class="switch"></label>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#proxy">Proxy</a></li>
+      <li><a href="#apps">Apps</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="hero">
+    <h1>Sergios Games</h1>
+    <p>Play, watch  — all in one place.</p>
+    <button class="cloaker-btn" onclick="cloakTab()">Enable Panic Mode (Cloak)</button>
+  </section>
+
+  <section id="games">
+    <h2>🎮 Games</h2>
+    <div class="grid">
+           <div class="game-card action" onclick="playGame('https://info.shop1stoponline.com/storage/ag/originals/clash-royale/')"><h3>Clash Royale</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card action" onclick="playGame('https://info.shop1stoponline.com/storage/ag/gn/198.html')"><h3>Slope</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card action" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/crazy-cattle-3d/')"><h3>Crazy cattle 3d</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card action" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/funny-shooter-2/')"><h3>Funny shooter 2</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card action" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/super-liquid-soccer')"><h3>Super liquid soccer</h3><button class="game-btn">PLAY</button></div>
+       <div class="game-card sports" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/basket-random/')"><h3>Basket Random</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card sports" onclick="playGame('https://info.shop1stoponline.com/storage/ag/gn/272.html')"><h3>Basketball Stars</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card sports" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/soccer-random/')"><h3>Soccer Random</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card sports" onclick="playGame('https://info.shop1stoponline.com/storage/ag/echo/boxing-random/')"><h3>Boxing Random</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card sports" onclick="playGame('https://info.shop1stoponline.com/storage/ag/gn/146.html')"><h3>8 ball</h3><button class="game-btn">PLAY</button></div>
+    <div class="game-card casual" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/geometry-dash/')"><h3>Geometry Dash</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card casual" onclick="playGame('https://2048game.com')"><h3>2048</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card casual" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/cookie-clicker/')"><h3>Cookie Clicker</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card casual" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/master-chess/')"><h3>Master chess</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card casual" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/candy-crush/')"><h3>Candy crush</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card casual" onclick="playGame('https://info.shop1stoponline.com/storage/ag/arsenic/crossy-road/')"><h3>Crossy roads</h3><button class="game-btn">PLAY</button></div>
+      <div class="game-card racing" onclick="playGame('https://info.shop1stoponline.com/storage/ag/gn/96.html')"><h3>Moto X3M</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card racing" onclick="playGame('https://info.shop1stoponline.com/storage/ag/echo/drift-hunters/')"><h3>Drift Hunters</h3><button class="game-btn">PLAY</button></div>
+        <div class="game-card racing" onclick="playGame('https://4texas4.github.io/EaglyMC/')"><h3>Minecraft</h3><button class="game-btn">PLAY</button></div>
+
+  </section>
+
+  <section id="proxy">
+    <h2>🌐 Web Proxy</h2>
+    <form action="#" class="proxy-form">
+      <input type="text" placeholder="doesnt work." required />
+      <button type="submit">Go</button>
+    </form>
+    <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">Coming soon.</p>
+  </section>
+
+  <section id="apps">
+    <h2>📱 Apps</h2>
+    <div class="grid">
+      <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://blooketbot.schoolcheats.net/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen; picture-in-picture"></iframe>
+        <h3>blooketbot</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div>
+      <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://discord.com/channels/@me" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>Discord</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div>
+  
+   <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://play.geforcenow.com/mall/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>Geforce Now</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div> 
+  
+   <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://www.instagram.com/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>instagram</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div> 
+  
+   <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://www.snapchat.com/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>snapchat</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div> 
+  
+   <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://www.tiktok.com/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>tiktok</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div> 
+   <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://www.twitch.tv/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>twitch</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div> 
+  
+   <div class="card app-card">
+        <iframe src="https://teacher.ramalhais.com/embed/embed.html#https://www.youtube.com/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>youtube</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div> 
+  
+   <div class="card app-card">
+        <iframe src="https://meeting.experte.de/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>meeting</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div> 
+  
+    <div class="card app-card">
+        <iframe src="https://s3.amazonaws.com/ghst/music/index.html" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>Ghost</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div>
+  
+      <div class="card app-card">
+        <iframe src="https://xprime.su/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>xprime</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div>
+  
+        <div class="card app-card">
+        <iframe src="https://www.myinstants.com/en/search/?name=free" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>Soundboard</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div>
+  
+        <div class="card app-card">
+        <iframe src="https://scramjet.mercurywork.shop/" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" allow="autoplay; fullscreen"></iframe>
+        <h3>Scramjet</h3>
+        <button class="game-btn" onclick="openAppFullscreen(this)">FULLSCREEN</button>
+      </div>
+  
+  
+  
+  
+  
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Sergio's Games. Built for School.</p>
+  </footer>
+
+  <script>
+    function playGame(url) {
+      const win = window.open();
+      if (!win) return alert("Please allow pop-ups!");
+      win.document.body.style.margin = '0';
+      win.document.body.style.height = '100vh';
+      win.document.body.style.overflow = 'hidden';
+      const iframe = win.document.createElement('iframe');
+      iframe.style.border = 'none'; 
+      iframe.style.width = '100%'; 
+      iframe.style.height = '100%';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('allow', 'fullscreen; autoplay; encrypted-media');
+      iframe.src = url;
+      win.document.body.appendChild(iframe);
+    }
+
+    // Forces the iframe into fullscreen mode
+    function openAppFullscreen(btn) {
+      const iframe = btn.parentElement.querySelector('iframe');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) { /* Safari/Chrome */
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) { /* IE11 */
+        iframe.msRequestFullscreen();
+      }
+    }
+
+    function cloakTab() {
+      const title = document.getElementById('tab-title');
+      const icon = document.getElementById('tab-icon');
+      if (title.innerText === "Sergio's Games") {
+        title.innerText = "Google Drive - My Drive";
+        icon.href = "https://ssl.gstatic.com/docs/doclist/images/drive_2020q4_32dp.png";
+      } else {
+        title.innerText = "Sergios Games";
+        icon.href = "https://www.google.com/favicon.ico";
+      }
+    }
+
+    const toggle = document.getElementById("darkModeToggle");
+    toggle.addEventListener("change", () => document.body.classList.toggle("dark-mode"));
+  </script>
+</body>
+</html>
+
+
